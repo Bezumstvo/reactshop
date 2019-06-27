@@ -5,52 +5,30 @@ import { categoriesActions } from "../../_actions";
 
 import MaterialTable from 'material-table';
 
-//import V0MuiThemeProvider from "material-ui";
-
 import logo from "./logo.svg";
 import "./App.css";
 import { Form } from "../ControlPage";
-import TableCategories from "./TableCategories";
-/*
-import injectTapEventPlugin from "react-tap-event-plugin";
-injectTapEventPlugin();
-*/
+
 class ControlPage extends React.Component {
   constructor() {
     super();
-    this.state = {
-      editIdx: -1,
-/*      columns: [
-      { title: "name", field:"name" },
-      { title: "description", field: "description" }
-    ],
-    data: []
-    */
-  };
+
     this.onSubmit = this.onSubmit.bind(this);
-    this.startEditing = this.startEditing.bind(this);
-    this.stopEditing = this.stopEditing.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-  }
-
-  handleRemove(id) {
-    var idJson = { id: id };
-    this.props.remove(idJson);
-  }
-
-  startEditing(i) {
-    this.setState({ editIdx: i });
-  }
-
-  stopEditing() {
-    this.setState({ editIdx: -1 });
   }
 
   onSubmit(event) {
     this.props.add({ name: this.state.name, description: this.state.desc });
     event.preventDefault();
   }
-
+  handleUpdate(values) {
+    this.props.update(values);
+  }
+  handleRemove(id) {
+    var idJson = { id: id };
+    this.props.remove(idJson);
+  }
   componentDidMount() {
     this.props.getAll();
   }
@@ -65,16 +43,18 @@ class ControlPage extends React.Component {
     }
 
     const headRows = [
-      { title: "name", field:"name" },
-      { title: "description", field: "description" }
+      { title: "name", field:"name" , onRowDataChange: ''},
+      { title: "description", field: "description" , onRowDataChange: ''}
     ];
 
     return (
       <div>
         <div className="App">
           <Form />
-            {categories && <MaterialTable
-            title="Categories"
+            {categories &&
+
+            <MaterialTable
+            title="categories"
             columns={headRows}
             data={categories}
             editable={{
@@ -82,31 +62,28 @@ class ControlPage extends React.Component {
                 new Promise(resolve => {
                   setTimeout(() => {
                     resolve();
-                    const data = [...state.data];
-                    data.push(newData);
-                    setState({ ...state, data });
+                    this.props.add(newData);
                   }, 600);
                 }),
               onRowUpdate: (newData, oldData) =>
                 new Promise(resolve => {
                   setTimeout(() => {
                     resolve();
-                    const data = [...state.data];
-                    data[data.indexOf(oldData)] = newData;
-                    setState({ ...state, data });
+                  this.handleUpdate(newData)
                   }, 600);
                 }),
               onRowDelete: oldData =>
                 new Promise(resolve => {
                   setTimeout(() => {
                     resolve();
-                    const data = [...state.data];
-                    data.splice(data.indexOf(oldData), 1);
-                    setState({ ...state, data });
+                    console.log(oldData)
+                this.handleRemove(oldData._id)
                   }, 600);
                 }),
+
             }}
-          />}
+          />
+        }
         </div>
         <hr />
       </div>

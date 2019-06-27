@@ -43,8 +43,9 @@ async function update(token) {
     var { role } = jwt.decode(token.headers.authorization.substr(7)); // substr cut "Bearer"
   }
   if (role === 1) {
+    console.log(token.body)
     const Categories = db.models.Categories;
-    await db.models.Categories.find({ _id: token.body.id }).updateOne({
+    await db.models.Categories.find({ _id: token.body._id }).updateOne({
       name: token.body.name,
       description: token.body.description
     });
