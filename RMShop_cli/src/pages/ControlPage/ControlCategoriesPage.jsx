@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { categoriesActions } from "../../_actions";
 import { ruLang as lang, table_localization as localization } from "../../_constants";
+
 import MaterialTable from 'material-table';
 
 import logo from "./logo.svg";
 import "./App.css";
 //import { Form } from "../ControlPage";
 
-class ControlPage extends React.Component {
+class ControlCategoriesPage extends React.Component {
   constructor() {
     super();
 
@@ -43,10 +44,9 @@ class ControlPage extends React.Component {
     }
 
     const headRows = [
-      { title: lang.TABLE_NAME, field:"name" },
-      { title: lang.TABLE_DESCRIPTION, field: "description" }
+      { title: "name", field:"name" },
+      { title: "description", field: "description" }
     ];
-
 
     return (
       <div>
@@ -107,8 +107,8 @@ const mapDispatchToProps = dispatch => ({
   update: params => dispatch(categoriesActions.update(params)),
   remove: params => dispatch(categoriesActions.remove(params))
 });
-const connectedControlPage = connect(
+const connectedControlCategoriesPage = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ControlPage);
-export { connectedControlPage as ControlPage };
+)(ControlCategoriesPage);
+export { connectedControlCategoriesPage as ControlCategoriesPage };

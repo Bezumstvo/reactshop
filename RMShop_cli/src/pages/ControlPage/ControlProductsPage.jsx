@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { categoriesActions } from "../../_actions";
+import { productsActions, categoriesActions, departmentsActions } from "../../_actions";
 import { ruLang as lang, table_localization as localization } from "../../_constants";
 import MaterialTable from 'material-table';
 
@@ -9,7 +9,7 @@ import logo from "./logo.svg";
 import "./App.css";
 //import { Form } from "../ControlPage";
 
-class ControlPage extends React.Component {
+class ControlProductsPage extends React.Component {
   constructor() {
     super();
 
@@ -31,34 +31,49 @@ class ControlPage extends React.Component {
   }
   componentDidMount() {
     this.props.getAll();
+    this.props.getCategoriesAll();
+    this.props.getDepartmentsAll();
   }
 
   render() {
-    var categories;
-    var { datacategories } = this.props;
-    try {
+    var products, categories, departments, id_name_cats = {}, id_name_departments = {};
+    var { dataproducts, datacategories, datadepartments } = this.props;
+    if (dataproducts && datacategories && datadepartments && dataproducts.items && datacategories.items && datadepartments.items) {
+      products = dataproducts.items;
       categories = datacategories.items;
-    } catch (e) {
-      console.log(e);
+      departments = datadepartments.items;
+
+      categories.forEach(function(val) {
+              id_name_cats[val._id] = val.name;
+      });
+      departments.forEach(function(val) {
+              id_name_departments[val._id] = val.name;
+      });
+
     }
-
     const headRows = [
-      { title: lang.TABLE_NAME, field:"name" },
-      { title: lang.TABLE_DESCRIPTION, field: "description" }
+      { title: "name", field:"name" },
+      { title: "description", field: "description" },
+      { title: "cost", field:"cost" },
+      { title: "value", field:"value" },
+      { title: "weight", field:"weight" },
+      { title: "size", field:"size" },
+      { title: "attribute", field:"attribute" },
+      { title: "department", field:"department", lookup:id_name_departments },
+      { title: "category", field:"category", lookup: id_name_cats }
     ];
-
 
     return (
       <div>
         <div className="App">
 
-            {categories &&
+            {products &&
 
             <MaterialTable
             localization={localization}
-            title={lang.TITLE_CATEGORIES}
+            title={lang.TITLE_PRODUCTS}
             columns={headRows}
-            data={categories}
+            data={products}
             editable={{
               onRowAdd: newData =>
                 new Promise(resolve => {
@@ -71,6 +86,7 @@ class ControlPage extends React.Component {
                 new Promise(resolve => {
                   setTimeout(() => {
                     resolve();
+                    console.log(newData)
                   this.handleUpdate(newData)
                   }, 600);
                 }),
@@ -94,21 +110,25 @@ class ControlPage extends React.Component {
 }
 
 const mapStateToProps = store => {
-  const { datacategories, authentication } = store;
+  const { dataproducts, datacategories, datadepartments, authentication } = store;
   const { user } = authentication;
   return {
     user,
-    datacategories
+    dataproducts,
+    datacategories,
+    datadepartments
   };
 };
 const mapDispatchToProps = dispatch => ({
-  getAll: () => dispatch(categoriesActions.getAll()),
-  add: params => dispatch(categoriesActions.add(params)),
-  update: params => dispatch(categoriesActions.update(params)),
-  remove: params => dispatch(categoriesActions.remove(params))
+  getCategoriesAll: () => dispatch(categoriesActions.getAll()),
+  getDepartmentsAll: () => dispatch(departmentsActions.getAll()),
+  getAll: () => dispatch(productsActions.getAll()),
+  add: params => dispatch(productsActions.add(params)),
+  update: params => dispatch(productsActions.update(params)),
+  remove: params => dispatch(productsActions.remove(params))
 });
-const connectedControlPage = connect(
+const connectedControlProductsPage = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ControlPage);
-export { connectedControlPage as ControlPage };
+)(ControlProductsPage);
+export { connectedControlProductsPage as ControlProductsPage };

@@ -13,13 +13,13 @@ class HomePage extends React.Component {
 
   render() {
       var categories
-      var { datatable } = this.props
-       try { categories = (datatable.items)
+      var { datacategories } = this.props
+       try { categories = (datacategories.items)
        }catch(e) { console.log(e); }
 
         return (
-          <div key={datatable.loading}>
-          {datatable.loading && <em>Загрузка зданий...</em>}
+          <div key={datacategories.loading}>
+          {datacategories.loading && <em>Загрузка зданий...</em>}
             {categories &&
                categories.map((cat, index) =>
                 <div id={cat.id} key={index+1} style={{display: 'block', border:'1px solid blue', float:'left', width:'300px'}}>
@@ -32,11 +32,11 @@ class HomePage extends React.Component {
 }
 
 const mapStateToProps = store => {
-  const { datatable, authentication } = store;
+  const { datacategories, authentication } = store;
   const { user } = authentication;
   return {
     user,
-    datatable
+    datacategories
   }
 }
 const mapDispatchToProps = dispatch => ({

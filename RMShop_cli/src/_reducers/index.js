@@ -1,17 +1,15 @@
 import { combineReducers } from 'redux';
-
 import { authentication } from './authentication.reducer';
 import { users } from './users.reducer';
 import { alert } from './alert.reducer';
-import { setIdsReducer, datapage, datatable, idsState } from './setIds.reducer';
+import { datacategories, dataproducts, datadepartments } from './data.reducer';
 
 const rootReducer = combineReducers({
   authentication,
-  setIdsReducer,
-  idsState,
   users,
-  datapage,
-  datatable,
+  datacategories,
+  dataproducts,
+  datadepartments,
   alert
 });
 

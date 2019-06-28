@@ -15,18 +15,18 @@ function getAll(params) {
     categoriesService
       .getAll(params)
       .then(
-        datatable => dispatch(success(datatable)),
+        datacategories => dispatch(success(datacategories)),
         error => dispatch(failure(error))
       );
   };
   function request() {
-    return { type: routeConstants.GET_TABLE_REQUEST };
+    return { type: routeConstants.GET_CATEGORIES_REQUEST };
   }
-  function success(datatable) {
-    return { type: routeConstants.GET_TABLE_SUCCESS, datatable };
+  function success(datacategories) {
+    return { type: routeConstants.GET_CATEGORIES_SUCCESS, datacategories };
   }
   function failure(error) {
-    return { type: routeConstants.GET_TABLE__FAILURE, error };
+    return { type: routeConstants.GET_CATEGORIES__FAILURE, error };
   }
 }
 
@@ -35,18 +35,18 @@ function add(params) {
     categoriesService
       .add(params)
       .then(
-        datatable => dispatch(success(datatable)),
+        datacategories => dispatch(success(datacategories)),
         error => dispatch(failure(error))
       );
   };
   function request() {
-    return { type: routeConstants.GET_TABLE_REQUEST };
+    return { type: routeConstants.GET_CATEGORIES_REQUEST };
   }
-  function success(datatable) {
-    return { type: routeConstants.GET_TABLE_SUCCESS, datatable };
+  function success(datacategories) {
+    return { type: routeConstants.GET_CATEGORIES_SUCCESS, datacategories };
   }
   function failure(error) {
-    return { type: routeConstants.GET_TABLE__FAILURE, error };
+    return { type: routeConstants.GET_CATEGORIES__FAILURE, error };
   }
 }
 
@@ -55,18 +55,18 @@ function update(params) {
     categoriesService
       .update(params)
       .then(
-        datatable => dispatch(success(datatable)),
+        datacategories => dispatch(success(datacategories)),
         error => dispatch(failure(error))
       );
   };
   function request() {
-    return { type: routeConstants.GET_TABLE_REQUEST };
+    return { type: routeConstants.GET_CATEGORIES_REQUEST };
   }
-  function success(datatable) {
-    return { type: routeConstants.GET_TABLE_SUCCESS, datatable };
+  function success(datacategories) {
+    return { type: routeConstants.GET_CATEGORIES_SUCCESS, datacategories };
   }
   function failure(error) {
-    return { type: routeConstants.GET_TABLE__FAILURE, error };
+    return { type: routeConstants.GET_CATEGORIES__FAILURE, error };
   }
 }
 
@@ -75,17 +75,17 @@ function remove(params) {
     categoriesService
       .remove(params)
       .then(
-        datatable => dispatch(success(datatable)),
+        datacategories => dispatch(success(datacategories)),
         error => dispatch(failure(error))
       );
   };
   function request() {
-    return { type: routeConstants.GET_TABLE_REQUEST };
+    return { type: routeConstants.GET_CATEGORIES_REQUEST };
   }
-  function success(datatable) {
-    return { type: routeConstants.GET_TABLE_SUCCESS, datatable };
+  function success(datacategories) {
+    return { type: routeConstants.GET_CATEGORIES_SUCCESS, datacategories };
   }
   function failure(error) {
-    return { type: routeConstants.GET_TABLE__FAILURE, error };
+    return { type: routeConstants.GET_CATEGORIES__FAILURE, error };
   }
 }

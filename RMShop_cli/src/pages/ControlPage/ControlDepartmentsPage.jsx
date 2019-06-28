@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { categoriesActions } from "../../_actions";
+import { departmentsActions } from "../../_actions";
 import { ruLang as lang, table_localization as localization } from "../../_constants";
+
 import MaterialTable from 'material-table';
 
 import logo from "./logo.svg";
 import "./App.css";
 //import { Form } from "../ControlPage";
 
-class ControlPage extends React.Component {
+class ControlDepartmentsPage extends React.Component {
   constructor() {
     super();
 
@@ -34,31 +35,30 @@ class ControlPage extends React.Component {
   }
 
   render() {
-    var categories;
-    var { datacategories } = this.props;
+    var departments;
+    var { datadepartments } = this.props;
     try {
-      categories = datacategories.items;
+      departments = datadepartments.items;
     } catch (e) {
       console.log(e);
     }
 
     const headRows = [
-      { title: lang.TABLE_NAME, field:"name" },
-      { title: lang.TABLE_DESCRIPTION, field: "description" }
+      { title: "name", field:"name" },
+      { title: "description", field: "description" }
     ];
-
 
     return (
       <div>
         <div className="App">
 
-            {categories &&
+            {departments &&
 
             <MaterialTable
             localization={localization}
-            title={lang.TITLE_CATEGORIES}
+            title={lang.TITLE_DEPARTMENTS}
             columns={headRows}
-            data={categories}
+            data={departments}
             editable={{
               onRowAdd: newData =>
                 new Promise(resolve => {
@@ -94,21 +94,21 @@ class ControlPage extends React.Component {
 }
 
 const mapStateToProps = store => {
-  const { datacategories, authentication } = store;
+  const { datadepartments, authentication } = store;
   const { user } = authentication;
   return {
     user,
-    datacategories
+    datadepartments
   };
 };
 const mapDispatchToProps = dispatch => ({
-  getAll: () => dispatch(categoriesActions.getAll()),
-  add: params => dispatch(categoriesActions.add(params)),
-  update: params => dispatch(categoriesActions.update(params)),
-  remove: params => dispatch(categoriesActions.remove(params))
+  getAll: () => dispatch(departmentsActions.getAll()),
+  add: params => dispatch(departmentsActions.add(params)),
+  update: params => dispatch(departmentsActions.update(params)),
+  remove: params => dispatch(departmentsActions.remove(params))
 });
-const connectedControlPage = connect(
+const connectedControlDepartmentsPage = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ControlPage);
-export { connectedControlPage as ControlPage };
+)(ControlDepartmentsPage);
+export { connectedControlDepartmentsPage as ControlDepartmentsPage };
