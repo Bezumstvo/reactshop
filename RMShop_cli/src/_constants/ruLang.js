@@ -1,4 +1,14 @@
 export const ruLang = {
+    SITE_NAME: 'Мой магазинчик',
+    HELLO_GUEST:' Здравствуйте, Гость!',
+    YOU_LOGIN_AS: 'Вы вошли как: ',
+    MENU_CATEGORY: 'Категории',
+    MENU_PRODUCT: 'Продукты',
+    MENU_DELIVERY: 'Доставка',
+    MENU_EXIT: 'Выход',
+
+    SELECT_IMAGE_FOR_PREVIEW: 'Загрузите картинку, для предпросмотра',
+    UPLOAD_IMAGE: 'Загрузить',
     TABLE_NAME: 'Имя',
     TABLE_DESCRIPTION: 'Описание',
 

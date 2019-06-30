@@ -1,5 +1,9 @@
 a {
    cursor: pointer;
+   color: #313233;
+ }
+ a:hover {
+   color: #686e74;
  }
 .help-block {
    font-size: 12px;
@@ -7,7 +11,7 @@ a {
  .block-shop-1 {
    padding-top:5px;
    width: 100%;
-   background-color: #337ab7;
+   background-color: #313233;
  }
 .center-white {
   padding-top: 12px;
@@ -20,9 +24,31 @@ a {
   height: 50px;
 }
 img.header-image {
-  width: 40px;
+  width: 86px;
   height:45px;
   float: left;
+}
+.shop-grid h4 {
+  text-color:red;
+  color:red;
+}
+input.fileInput{
+  display: inline;
+  cursor: pointer;
+}
+.imageUpload {
+display: inline;
+}
+
+.imgPreview {
+  height: 100px;
+  width: auto;
+  overflow: hidden;
+}
+
+.imgPreview img{
+  height: 100px;
+  width: auto;
 }
 
 .switch-input {

@@ -1,5 +1,24 @@
 import { routeConstants } from '../_constants';
 
+export function datafiles (state = {}, action) {
+  switch (action.type) {
+    case routeConstants.GET_FILES_REQUEST:
+      return {
+        loading: true
+      };
+    case routeConstants.GET_FILES_SUCCESS:
+      return {
+        items: action.datafiles
+      };
+    case routeConstants.GET_FILES_FAILURE:
+      return {
+        error: action.error
+      };
+    default:
+      return state
+  }
+}
+
 export function datacategories (state = {}, action) {
   switch (action.type) {
     case routeConstants.GET_CATEGORIES_REQUEST:

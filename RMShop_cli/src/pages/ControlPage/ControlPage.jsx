@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { categoriesActions } from "../../_actions";
 import { ruLang as lang, table_localization as localization } from "../../_constants";
 import MaterialTable from 'material-table';
-
+import {ImageUpload} from '../../_components';
 import logo from "./logo.svg";
 import "./App.css";
 //import { Form } from "../ControlPage";
@@ -44,16 +44,27 @@ class ControlPage extends React.Component {
 
     const headRows = [
       { title: lang.TABLE_NAME, field:"name" },
-      { title: lang.TABLE_DESCRIPTION, field: "description" }
+      { title: lang.TABLE_DESCRIPTION, field: "description" },
+      {
+        field: 'url',
+        Title: 'Avatar',
+        render: rowData => <img src={rowData.url} style={{width: 50, borderRadius: '50%'}}/>
+      },{
+        field: 'url',
+        Title: 'Avatar',
+        render: rowData => <ImageUpload/>
+      }
     ];
 
 
     return (
       <div>
+      <form method="POST" action="http://127.0.0.1:4000/files/upload">
+      <input type="file" name="file1"/>
+      <input type="submit" />
+      </form>
         <div className="App">
-
             {categories &&
-
             <MaterialTable
             localization={localization}
             title={lang.TITLE_CATEGORIES}
@@ -82,7 +93,6 @@ class ControlPage extends React.Component {
                 this.handleRemove(oldData._id)
                   }, 600);
                 }),
-
             }}
           />
         }

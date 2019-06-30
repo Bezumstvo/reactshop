@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {categoriesActions} from '../../_actions';
 
+import { ruLang as lang, table_localization as localization } from "../../_constants";
+import { ShopGrid } from '../../_components';
+
 class CategoryPage extends React.Component {
   constructor() {
     super();
@@ -13,35 +16,43 @@ class CategoryPage extends React.Component {
   }
 
   render() {
-      var categories
-      var { datatable } = this.props
-       try { categories = (datatable.items)
-       }catch(e) { console.log(e); }
-
-        return (
-          <div key={datatable.loading}>
-          {datatable.loading && <em>Загрузка зданий...</em>}
-            {categories &&
-               categories.map((cat, index) =>
-                <div id={cat.id} key={index+1} style={{display: 'block', border:'1px solid blue', float:'left', width:'300px'}}>
-                  <p>{cat.name}</p><p>{cat.description}</p>
-                </div>
-                )}
-          </div>
-        )
+    var categories;
+    var { datacategories } = this.props;
+    try {
+      categories = datacategories.items;
+    } catch (e) {
+      console.log(e);
     }
+
+    return (
+      <div>
+        <div className="App">
+
+            {categories &&
+              <ShopGrid
+              data = {categories}
+              columns = {4}
+              />
+        }
+        </div>
+        <hr />
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = store => {
-  const { datatable, authentication } = store;
+  const { datacategories, authentication } = store;
   const { user } = authentication;
   return {
     user,
-    datatable
-  }
-}
+    datacategories
+  };
+};
+
 const mapDispatchToProps = dispatch => ({
-  getAll: c => dispatch(categoriesActions.getAll(c)),
+  getAll: () => dispatch(categoriesActions.getAll()),
 })
+
 const connectedCategoryPage = connect(mapStateToProps,mapDispatchToProps)(CategoryPage);
 export { connectedCategoryPage as CategoryPage };

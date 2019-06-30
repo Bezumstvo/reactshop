@@ -6,9 +6,7 @@ import { ruLang as lang, table_localization as localization } from "../../_const
 
 import MaterialTable from 'material-table';
 
-import logo from "./logo.svg";
 import "./App.css";
-//import { Form } from "../ControlPage";
 
 class ControlCategoriesPage extends React.Component {
   constructor() {
