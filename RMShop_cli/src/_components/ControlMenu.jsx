@@ -16,7 +16,6 @@ return (
 
 class ControlMenu extends React.Component {
     render() {
-      localStorage.getItem('user').role;
       var show = false;
       if (localStorage.getItem('user')) {
         var user = JSON.parse(localStorage.getItem('user'));
