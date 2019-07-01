@@ -42,7 +42,8 @@ const ProductsSchema = new Schema({
   size: { type: String, required: true },
   attribute: [{ type: String }],
   category: { type: ObjectId, required: true },
-  department: { type: ObjectId, required: true }
+  department: { type: ObjectId, required: true },
+  image: {type: String,  default: '/public/nophoto.png' }
 });
 
 const Users = mongoose.model("Users", UsersSchema);

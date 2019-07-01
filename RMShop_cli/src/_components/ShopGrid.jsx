@@ -13,6 +13,7 @@ class ShopGrid extends React.Component {
               array.map((element, index) =>
                <div className={'shop-grid col-md-'+columns}  key={element._id}>
                  <h4>{element.name}</h4>
+                 <p><img src={element.image} style={{width:"100px"}} /></p>
                  <p>{element.description}</p>
                </div>
                )}

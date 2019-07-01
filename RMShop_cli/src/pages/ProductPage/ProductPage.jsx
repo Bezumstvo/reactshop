@@ -20,6 +20,7 @@ class ProductPage extends React.Component {
     var { dataproducts } = this.props;
     try {
       products = dataproducts.items;
+      console.log(products)
     } catch (e) {
       console.log(e);
     }

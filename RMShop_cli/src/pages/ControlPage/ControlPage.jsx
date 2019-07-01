@@ -18,6 +18,7 @@ class ControlPage extends React.Component {
     this.handleRemove = this.handleRemove.bind(this);
   }
 
+
   onSubmit(event) {
     this.props.add({ name: this.state.name, description: this.state.desc });
     event.preventDefault();
@@ -47,11 +48,11 @@ class ControlPage extends React.Component {
       { title: lang.TABLE_DESCRIPTION, field: "description" },
       {
         field: 'url',
-        Title: 'Avatar',
+        Title: 'image',
         render: rowData => <img src={rowData.url} style={{width: 50, borderRadius: '50%'}}/>
       },{
         field: 'url',
-        Title: 'Avatar',
+        Title: 'image',
         render: rowData => <ImageUpload/>
       }
     ];
@@ -59,10 +60,6 @@ class ControlPage extends React.Component {
 
     return (
       <div>
-      <form method="POST" action="http://127.0.0.1:4000/files/upload">
-      <input type="file" name="file1"/>
-      <input type="submit" />
-      </form>
         <div className="App">
             {categories &&
             <MaterialTable

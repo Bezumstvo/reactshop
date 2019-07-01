@@ -6,32 +6,17 @@ import { filesActions } from "../_actions";
 export default class ImageUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {file: '',imagePreviewUrl: ''};
+    this.state = {file: null,imagePreviewUrl: ''};
   }
 
   _handleSubmit(e) {
     e.preventDefault();
       var formData = new FormData();
-      formData.append('logo', this.state.file);
-      var objArr = [];
-      objArr.push({"id": '3', "name": 'userName'});
-      //JSON obj
-      formData.append('objArr', JSON.stringify( objArr ));
-/*          {
-              url: url,
-              type:"POST",
-              processData:false,
-              contentType: false,
-              data: formData,
-      	    	complete: function(data){
-              alert("success");
-              }
-            }
-            */
-    this.props.upload(formData);
-    // TODO: do something with -> this.state.file
-    console.log('handle uploading-',formData);
-    formData
+      var d = document.getElementsByName("file")
+
+      formData.append("uploadImg", this.state.file, this.state.file.name);
+      formData.append("path", this.state.file.name);
+      this.props.upload(formData);
   }
 
   _handleImageChange(e) {
@@ -58,15 +43,16 @@ export default class ImageUpload extends React.Component {
     } else {
       $imagePreview = (<div className="previewText">{lang.SELECT_IMAGE_FOR_PREVIEW}</div>);
     }
-
+console.log('this=', this.state.file);
+(this.state.file===null) ? console.log('null') : console.log('true');
     return (
       <div className="previewComponent">
         <form onSubmit={(e)=>this._handleSubmit(e)}>
           <input className="fileInput"
-            type="file"
+            type="file" name="file"
             onChange={(e)=>this._handleImageChange(e)} />
-          <button className="imageUpload submitButton"
-            type="submit"
+          <button className="imageUpload submitButton"  key={this.state.file}
+            type="submit" style={{display: (this.state.file===null) ? "none" : "inline" }}
             onClick={(e)=>this._handleSubmit(e)}>{lang.UPLOAD_IMAGE}</button>
         </form>
       </div>

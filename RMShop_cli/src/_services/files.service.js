@@ -8,12 +8,14 @@ export const filesService = {
 function upload(values) {
   const requestOptions = {
     method: "POST",
-    headers: { ...authHeader(), "Content-Type": "application/x-www-form-urlencoded" },
+    headers:{...authHeader(), "Accept": "*/*"},
     body: values
   };
+
   return fetch(`${config.apiUrl}/files/upload`, requestOptions).then(
     handleResponse
   );
+
 }
 
 function handleResponse(response) {
