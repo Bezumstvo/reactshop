@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { categoriesActions } from "../../_actions";
 import { ruLang as lang, table_localization as localization } from "../../_constants";
-
 import MaterialTable from 'material-table';
-
-import "./App.css";
 
 class ControlCategoriesPage extends React.Component {
   constructor() {
@@ -48,8 +45,6 @@ class ControlCategoriesPage extends React.Component {
 
     return (
       <div>
-        <div className="App">
-
             {categories &&
 
             <MaterialTable
@@ -84,8 +79,6 @@ class ControlCategoriesPage extends React.Component {
             }}
           />
         }
-        </div>
-        <hr />
       </div>
     );
   }

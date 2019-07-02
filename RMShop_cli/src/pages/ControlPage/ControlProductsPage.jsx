@@ -4,10 +4,7 @@ import { connect } from "react-redux";
 import { productsActions, categoriesActions, departmentsActions } from "../../_actions";
 import { ruLang as lang, table_localization as localization } from "../../_constants";
 import MaterialTable from 'material-table';
-
-import logo from "./logo.svg";
-import "./App.css";
-//import { Form } from "../ControlPage";
+import {ImageUpload} from '../../_components';
 
 class ControlProductsPage extends React.Component {
   constructor() {
@@ -60,13 +57,15 @@ class ControlProductsPage extends React.Component {
       { title: "size", field:"size" },
       { title: "attribute", field:"attribute" },
       { title: "department", field:"department", lookup:id_name_departments },
-      { title: "category", field:"category", lookup: id_name_cats }
+      { title: "category", field:"category", lookup: id_name_cats },{
+        Title: 'image',
+        field: '_id',
+        render: rowData => <ImageUpload id = {rowData._id}  />
+      }
     ];
 
     return (
       <div>
-        <div className="App">
-
             {products &&
 
             <MaterialTable
@@ -86,16 +85,14 @@ class ControlProductsPage extends React.Component {
                 new Promise(resolve => {
                   setTimeout(() => {
                     resolve();
-                    console.log(newData)
-                  this.handleUpdate(newData)
+                    this.handleUpdate(newData)
                   }, 600);
                 }),
               onRowDelete: oldData =>
                 new Promise(resolve => {
                   setTimeout(() => {
                     resolve();
-                    console.log(oldData)
-                this.handleRemove(oldData._id)
+                    this.handleRemove(oldData._id)
                   }, 600);
                 }),
 
@@ -103,8 +100,6 @@ class ControlProductsPage extends React.Component {
           />
         }
         </div>
-        <hr />
-      </div>
     );
   }
 }

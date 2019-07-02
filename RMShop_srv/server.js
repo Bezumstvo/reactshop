@@ -1,11 +1,11 @@
 ﻿require("rootpath")();
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const jwt = require("_helpers/jwt");
 const errorHandler = require("_helpers/error-handler");
 var path = require('path');     //used for file path
+const app = express();
 
 
 app.use(bodyParser.urlencoded({limit: '50mb',  extended: false }));

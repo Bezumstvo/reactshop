@@ -34,7 +34,7 @@ class App extends React.Component {
         <Menu />
         <ControlMenu />
         <div className="jumbotron">
-          <div className="container">
+          <div className="container-fluid">
             <div className="col-sm-12 col-sm-offset-0">
               {alert.message && (
                 <div className={`alert ${alert.type}`}>{alert.message}</div>

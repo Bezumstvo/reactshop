@@ -1,6 +1,4 @@
-﻿const config = require("config.json");
-const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose");
+﻿const jwt = require("jsonwebtoken");
 const db = require("../_helpers/db.js");
 
 module.exports = {

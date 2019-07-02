@@ -5,9 +5,7 @@ import { categoriesActions } from "../../_actions";
 import { ruLang as lang, table_localization as localization } from "../../_constants";
 import MaterialTable from 'material-table';
 import {ImageUpload} from '../../_components';
-import logo from "./logo.svg";
-import "./App.css";
-//import { Form } from "../ControlPage";
+
 
 class ControlPage extends React.Component {
   constructor() {
@@ -60,8 +58,8 @@ class ControlPage extends React.Component {
 
     return (
       <div>
-        <div className="App">
             {categories &&
+
             <MaterialTable
             localization={localization}
             title={lang.TITLE_CATEGORIES}
@@ -94,8 +92,6 @@ class ControlPage extends React.Component {
           />
         }
         </div>
-        <hr />
-      </div>
     );
   }
 }

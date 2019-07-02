@@ -7,6 +7,7 @@ export default class ImageUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {file: null,imagePreviewUrl: ''};
+    console.log(this.props.id)
   }
 
   _handleSubmit(e) {
@@ -15,7 +16,7 @@ export default class ImageUpload extends React.Component {
       var d = document.getElementsByName("file")
 
       formData.append("uploadImg", this.state.file, this.state.file.name);
-      formData.append("path", this.state.file.name);
+      formData.append("_id", this.props.id);
       this.props.upload(formData);
   }
 
@@ -43,8 +44,6 @@ export default class ImageUpload extends React.Component {
     } else {
       $imagePreview = (<div className="previewText">{lang.SELECT_IMAGE_FOR_PREVIEW}</div>);
     }
-console.log('this=', this.state.file);
-(this.state.file===null) ? console.log('null') : console.log('true');
     return (
       <div className="previewComponent">
         <form onSubmit={(e)=>this._handleSubmit(e)}>

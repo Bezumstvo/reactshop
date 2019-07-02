@@ -3,12 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { departmentsActions } from "../../_actions";
 import { ruLang as lang, table_localization as localization } from "../../_constants";
-
 import MaterialTable from 'material-table';
-
-import logo from "./logo.svg";
-import "./App.css";
-//import { Form } from "../ControlPage";
 
 class ControlDepartmentsPage extends React.Component {
   constructor() {
@@ -50,8 +45,6 @@ class ControlDepartmentsPage extends React.Component {
 
     return (
       <div>
-        <div className="App">
-
             {departments &&
 
             <MaterialTable
@@ -87,8 +80,6 @@ class ControlDepartmentsPage extends React.Component {
           />
         }
         </div>
-        <hr />
-      </div>
     );
   }
 }
