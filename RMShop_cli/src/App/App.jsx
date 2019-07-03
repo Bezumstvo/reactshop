@@ -40,25 +40,22 @@ class App extends React.Component {
                 <div className={`alert ${alert.type}`}>{alert.message}</div>
               )}
               <Router history={history}>
-                <div>
                 <Switch>
-                  <Route exact path="/" component={HomePage} />
-                  <Route path="/login" component={LoginPage} />
-                  <Route path="/registration" component={RegistrationPage} />
-                  <Route path="/category" component={CategoryPage} />
-                  <Route path="/product" component={ProductPage} />
-                  <Route path="/delivery" component={DeliveryPage} />
-
+                  <Route exact path="/" component={()=><HomePage/>} />
+                  <Route path="/login" component={()=><LoginPage/>} />
+                  <Route path="/registration" component={()=><RegistrationPage/>} />
+                  <Route path="/category" component={()=><CategoryPage/>} />
+                  <Route path="/product" component={()=><ProductPage/>} />
+                  <Route path="/delivery" component={()=><DeliveryPage/>} />
 
                   <PrivateRoute path="/control" component={ControlPage} />
                   <PrivateRoute path="/control-departments" component={ControlDepartmentsPage} />
                   <PrivateRoute path="/control-categories" component={ControlCategoriesPage} />
                   <PrivateRoute path="/control-products" component={ControlProductsPage} />
                   <PrivateRoute path="/account" component={AccountPage} />
-                  <Route path='/404' component={ER404Page} />
+                  <Route path='/404' component={()=><ER404Page/>} />
                   <Redirect from='*' to='/404' />
                   </Switch>
-                </div>
               </Router>
             </div>
           </div>

@@ -65,7 +65,7 @@ class ControlProductsPage extends React.Component {
     ];
 
     return (
-      <div>
+      <React.Fragment>
             {products &&
 
             <MaterialTable
@@ -99,7 +99,7 @@ class ControlProductsPage extends React.Component {
             }}
           />
         }
-        </div>
+        </React.Fragment>
     );
   }
 }
