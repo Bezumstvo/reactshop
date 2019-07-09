@@ -3,15 +3,13 @@ import { connect } from 'react-redux';
 import logo from '../../public/logo.png'
 import { ruLang as lang } from "../_constants";
 
+
 const Logout = (param) => {
- if (param.login) {
 return (
-  <div>
-    <a href="/login" style={{textAlign:'right', color:'white'}}>{lang.MENU_EXIT}</a>
+  <div className="logout">
+    <a href="/login"> {(param.login)? lang.MENU_EXIT : lang.MENU_LOGIN}</a>
   </div>
-)}else {
-  return null;
-}
+)
 }
 
 class Header extends React.Component {

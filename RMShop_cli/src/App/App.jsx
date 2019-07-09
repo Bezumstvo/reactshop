@@ -11,10 +11,23 @@ import { LoginPage } from "../pages/LoginPage";
 import { AccountPage } from "../pages/AccountPage";
 import { HomePage } from "../pages/HomePage";
 import { ER404Page } from "../pages/ER404Page";
-import { CategoryPage } from "../pages/CategoryPage";
+import { CategoriesPage, CategoryPage } from "../pages/CategoryPage";
 import { ProductPage } from "../pages/ProductPage";
 import { DeliveryPage } from "../pages/DeliveryPage";
 import { ControlPage, ControlCategoriesPage, ControlDepartmentsPage, ControlProductsPage} from "../pages/ControlPage";
+
+class SwitchControl extends React.Component {
+  render() {
+    return(
+      <Switch>
+        <PrivateRoute path="/control/departments" component={ControlDepartmentsPage} />
+        <PrivateRoute path="/control/categories" component={ControlCategoriesPage} />
+        <PrivateRoute path="/control/products" component={ControlProductsPage} />
+        <Redirect from='*' to='/404' />
+      </Switch>
+    )
+  }
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -31,31 +44,34 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <Menu />
-        <ControlMenu />
-        <div className="jumbotron">
+          <div className="jumbotron">
           <div className="container-fluid">
             <div className="col-sm-12 col-sm-offset-0">
               {alert.message && (
                 <div className={`alert ${alert.type}`}>{alert.message}</div>
               )}
               <Router history={history}>
+              <React.Fragment>
+                <Route path="/" component={()=><Menu/>} />
+                <Route path="/" component={()=><ControlMenu/>} />
+                <div className="clean"></div>
                 <Switch>
                   <Route exact path="/" component={()=><HomePage/>} />
                   <Route path="/login" component={()=><LoginPage/>} />
                   <Route path="/registration" component={()=><RegistrationPage/>} />
-                  <Route path="/category" component={()=><CategoryPage/>} />
-                  <Route path="/product" component={()=><ProductPage/>} />
+                  <Route exact path="/categories" component={()=><CategoriesPage/>} />
+                  <Route exact path="/products" component={()=><CategoryPage/>} />
+                  <Route path="/products/:id" component={ProductPage} />
                   <Route path="/delivery" component={()=><DeliveryPage/>} />
 
-                  <PrivateRoute path="/control" component={ControlPage} />
-                  <PrivateRoute path="/control-departments" component={ControlDepartmentsPage} />
-                  <PrivateRoute path="/control-categories" component={ControlCategoriesPage} />
-                  <PrivateRoute path="/control-products" component={ControlProductsPage} />
+                  <PrivateRoute exact path="/control" component={ControlPage} />
+
+                  <PrivateRoute path="/control/:part" component={SwitchControl} />
                   <PrivateRoute path="/account" component={AccountPage} />
                   <Route path='/404' component={()=><ER404Page/>} />
                   <Redirect from='*' to='/404' />
-                  </Switch>
+                </Switch>
+              </React.Fragment>
               </Router>
             </div>
           </div>

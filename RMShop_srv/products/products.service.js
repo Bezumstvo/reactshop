@@ -3,6 +3,7 @@ const db = require("../_helpers/db.js");
 
 module.exports = {
   getAll,
+  getById,
   add,
   update,
   remove
@@ -11,6 +12,14 @@ async function getAll(token) {
   var result;
   const products = db.models.Products;
   await db.models.Products.find().then(data => {
+    result = data;
+  });
+  return result;
+}
+async function getById(token) {
+  var result;
+  const product = db.models.Products;
+  await db.models.Products.find({"_id":token.body.id}).then(data => {
     result = data;
   });
   return result;
@@ -38,7 +47,6 @@ async function update(token) {
     var { role } = jwt.decode(token.headers.authorization.substr(7)); // substr cut "Bearer"
   }
   if (role === 1) {
-    console.log(token.body)
     const products = db.models.Products;
     await db.models.Products.find({ _id: token.body._id }).updateOne(token.body);
     await db.models.Products.find().then(data => {

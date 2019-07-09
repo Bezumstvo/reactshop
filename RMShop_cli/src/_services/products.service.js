@@ -3,6 +3,7 @@ import { authHeader } from "../_helpers";
 
 export const productsService = {
   getAll,
+  getById,
   add,
   update,
   remove
@@ -14,6 +15,18 @@ function getAll() {
     headers: authHeader()
   };
   return fetch(`${config.apiUrl}/products`, requestOptions).then(
+    handleResponse
+  );
+}
+
+
+function getById(values) {
+  const requestOptions = {
+    method: "POST",
+    headers: { ...authHeader(), "Content-Type": "application/json" },
+    body: JSON.stringify(values)
+  };
+  return fetch(`${config.apiUrl}/products/id`, requestOptions).then(
     handleResponse
   );
 }

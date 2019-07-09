@@ -44,7 +44,7 @@ class ControlCategoriesPage extends React.Component {
     ];
 
     return (
-      <div>
+      <div className="container-fluid" style={{float:"none", clear:"both"}}>
             {categories &&
 
             <MaterialTable

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {categoriesActions} from '../../_actions';
 
@@ -18,7 +17,7 @@ class ER404Page extends React.Component {
        }catch(e) { console.log(e); }
 
         return (
-          <div key={datatable.loading}>
+          <div>
           <h1>ERROR 404 : Page not found</h1>
           </div>
         )

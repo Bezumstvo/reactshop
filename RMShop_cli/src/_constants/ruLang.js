@@ -6,6 +6,7 @@ export const ruLang = {
     MENU_PRODUCT: 'Продукты',
     MENU_DELIVERY: 'Доставка',
     MENU_EXIT: 'Выход',
+    MENU_LOGIN: 'Войти',
 
     SELECT_IMAGE_FOR_PREVIEW: 'Загрузите картинку, для предпросмотра',
     UPLOAD_IMAGE: 'Загрузить',

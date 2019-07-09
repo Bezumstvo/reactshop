@@ -1,18 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import logo from '../../public/logo.png'
 import { ruLang as lang   } from "../_constants";
 
-const Logout = (param) => {
- if (param.login) {
-return (
-  <div>
-    <a href="/login" style={{textAlign:'right', color:'white'}}>exit</a>
-  </div>
-)}else {
-  return null;
-}
-}
 
 class ControlMenu extends React.Component {
     render() {
@@ -26,13 +16,13 @@ class ControlMenu extends React.Component {
           {show &&
             <React.Fragment>
               <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-              <a href="/control-departments">{lang.LINK_DEPARTMENTS}</a>
+              <Link to="/control/departments">{lang.LINK_DEPARTMENTS}</Link>
               </div>
               <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <a href="/control-categories">{lang.LINK_CATEGORIES}</a>
+                <Link to="/control/categories">{lang.LINK_CATEGORIES}</Link>
               </div>
               <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <a href="/control-products">{lang.LINK_PRODUCTS}</a>
+                <Link to="/control/products">{lang.LINK_PRODUCTS}</Link>
               </div>
               </React.Fragment>
         }

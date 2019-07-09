@@ -51,6 +51,13 @@ display: inline;
   width: auto;
 }
 
+
+
+.logout a {
+  text-align:'right';
+  color:'white';
+}
+
 .switch-input {
   display: none;
 }

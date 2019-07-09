@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {productsActions} from '../../_actions';
+import {categoriesActions} from '../../_actions';
 
 import { ruLang as lang, table_localization as localization } from "../../_constants";
 import { ProductGrid } from '../../_components';
 
-class CategoryPage extends React.Component {
+class CategoriesPage extends React.Component {
   constructor() {
     super();
   }
@@ -16,11 +16,10 @@ class CategoryPage extends React.Component {
   }
 
   render() {
-    var products;
-    var { dataproducts } = this.props;
+    var categories;
+    var { datacategories } = this.props;
     try {
-      products = dataproducts.items;
-      console.log(products)
+      categories = datacategories.items;
     } catch (e) {
       console.log(e);
     }
@@ -29,9 +28,9 @@ class CategoryPage extends React.Component {
       <div>
         <div className="App">
 
-            {products &&
+            {categories &&
               <ProductGrid
-              data = {products}
+              data = {categories}
               columns = {4}
               />
         }
@@ -43,17 +42,17 @@ class CategoryPage extends React.Component {
 }
 
 const mapStateToProps = store => {
-  const { dataproducts, authentication } = store;
+  const { datacategories, authentication } = store;
   const { user } = authentication;
   return {
     user,
-    dataproducts
+    datacategories
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  getAll: () => dispatch(productsActions.getAll()),
+  getAll: () => dispatch(categoriesActions.getAll()),
 })
 
-const connectedCategoryPage = connect(mapStateToProps,mapDispatchToProps)(CategoryPage);
-export { connectedCategoryPage as CategoryPage };
+const connectedCategoriesPage = connect(mapStateToProps,mapDispatchToProps)(CategoriesPage);
+export { connectedCategoriesPage as CategoriesPage };

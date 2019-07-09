@@ -1,10 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ruLang as lang } from "../_constants";
 
-class ShopGrid extends React.Component {
+class ProductGrid extends React.Component {
     render() {
-      console.log(this.props.data)
       const array = this.props.data;
       var columns = Math.round(12 / this.props.columns);
         return (
@@ -13,7 +13,7 @@ class ShopGrid extends React.Component {
               array.map((element, index) =>
                <div className={'shop-grid col-md-'+columns}  key={element._id}>
                  <h4>{element.name}</h4>
-                 <p><img src={'http://127.0.0.1:4000/'+element.image} style={{width:"100px"}} /></p>
+                 <p><Link to={'products/'+element._id}><img src={'http://127.0.0.1:4000/'+element.image} style={{width:"100px"}} /></Link></p>
                  <p>{element.description}</p>
                </div>
                )}
@@ -22,5 +22,4 @@ class ShopGrid extends React.Component {
     }
 }
 
-
-export { ShopGrid as ShopGrid };
+export { ProductGrid as ProductGrid };

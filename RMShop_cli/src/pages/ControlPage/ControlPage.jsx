@@ -33,6 +33,7 @@ class ControlPage extends React.Component {
   }
 
   render() {
+    console.log('controlPage')
     var categories;
     var { datacategories } = this.props;
     try {
@@ -57,7 +58,7 @@ class ControlPage extends React.Component {
 
 
     return (
-      <div>
+      <div> <h1>Админка</h1>
             {categories &&
 
             <MaterialTable

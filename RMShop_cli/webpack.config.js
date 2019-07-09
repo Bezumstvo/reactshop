@@ -2,6 +2,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// Для анализа размера программы
+//var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const paths = {
   DIST: path.resolve(__dirname, 'dist'),
@@ -12,7 +14,7 @@ module.exports = {
   entry: path.join(paths.SRC, 'index.jsx'),
   output: {
     path: paths.DIST,
-    publicPath: '', // прописыывает пути к файлам
+    publicPath: '/', // прописыывает пути к файлам
     filename: 'bundle.js'
   },
   resolve: {
@@ -25,24 +27,15 @@ module.exports = {
           exclude: /(node_modules|bower_components)/,
           loader: 'babel-loader',
           query: {
-              presets: ['react', 'es2015', 'stage-3']
+              presets: ['react', 'es2015', 'stage-3', 'minify']
             }
       },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
-          use: 'css-loader' //, publicPath: '' // publicPath прошишит пути к шрифтам
+          use: 'css-loader' , publicPath: '/public' // publicPath прошишит пути к шрифтам
         }),
       },
-      {
-          test: /\.scss$/,
-          loader: ExtractTextPlugin.extract({
-                    use: [
-
-                "css-loader", // translates CSS into CommonJS
-          ]
-          }),
-        },
       {
         test: /\.(jpe?g|png|gif|woff|woff2|eot|otf|ico|ttf|svg|webm)$/,
         use: [
@@ -55,7 +48,14 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin({
      filename: 'style.css'
- }),
+   }),
+   /* для анализа размера программы */
+/*   new BundleAnalyzerPlugin({
+     analyzerMode: 'server',
+     generateStatsFile: true,
+     statsOptions: { source: false }
+   }),
+*/
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',

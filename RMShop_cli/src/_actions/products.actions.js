@@ -5,6 +5,7 @@ import { history } from "../_helpers";
 
 export const productsActions = {
   getAll,
+  getById,
   add,
   update,
   remove
@@ -27,6 +28,26 @@ function getAll(params) {
   }
   function failure(error) {
     return { type: routeConstants.GET_PRODUCTS__FAILURE, error };
+  }
+}
+
+function getById(params) {
+  return dispatch => {
+    productsService
+      .getById(params)
+      .then(
+        dataproduct => dispatch(success(dataproduct)),
+        error => dispatch(failure(error))
+      );
+  };
+  function request() {
+    return { type: routeConstants.GET_PRODUCT_REQUEST };
+  }
+  function success(dataproduct) {
+    return { type: routeConstants.GET_PRODUCT_SUCCESS, dataproduct };
+  }
+  function failure(error) {
+    return { type: routeConstants.GET_PRODUCT__FAILURE, error };
   }
 }
 

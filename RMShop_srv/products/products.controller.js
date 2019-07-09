@@ -4,6 +4,7 @@ const productsService = require("./products.service");
 
 // routes
 router.get("/", getAll);
+router.post("/id", getById);
 router.post("/add", add);
 router.post("/update", update);
 router.post("/remove", remove);
@@ -14,6 +15,13 @@ function getAll(req, res, next) {
   productsService
     .getAll(req.headers.authorization)
     .then(products => res.json(products))
+    .catch(err => next(err));
+}
+
+function getById(req, res, next) {
+  productsService
+    .getById(req)
+    .then(product => res.json(product))
     .catch(err => next(err));
 }
 

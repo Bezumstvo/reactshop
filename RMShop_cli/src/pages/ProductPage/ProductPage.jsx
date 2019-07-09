@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {productsActions} from '../../_actions';
 
 import { ruLang as lang, table_localization as localization } from "../../_constants";
-import { ShopGrid } from '../../_components';
 
 class ProductPage extends React.Component {
   constructor() {
@@ -12,47 +11,48 @@ class ProductPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAll();
+    if (this.props.match && this.props.match.params)
+     {
+       const prodId = this.props.match.params.id;
+       this.props.getById({"id":prodId});
+     }
   }
 
-  render() {
-    var products;
-    var { dataproducts } = this.props;
-    try {
-      products = dataproducts.items;
-      console.log(products)
-    } catch (e) {
-      console.log(e);
+    render() {
+      var product = '';
+      var { dataproduct } = this.props;
+      if (dataproduct && dataproduct.items) {
+        product = dataproduct.items[0];
+        console.log(product)
+      }
+      return (
+        <React.Fragment>
+          {product &&
+            <div>
+              <img src={'http://127.0.0.1:4000/'+product.image} alt={product.name} />
+              <h1>{product.name}</h1>
+              <p>{product.description}</p>
+              <p>{product.attribut}</p>
+              <p>{product.size}</p>
+              <p>{product.weight}</p>
+            </div>
+          }
+        </React.Fragment>
+      );
     }
-
-    return (
-      <div>
-        <div className="App">
-
-            {products &&
-              <ShopGrid
-              data = {products}
-              columns = {4}
-              />
-        }
-        </div>
-        <hr />
-      </div>
-    );
   }
-}
 
 const mapStateToProps = store => {
-  const { dataproducts, authentication } = store;
+  const { dataproduct, authentication } = store;
   const { user } = authentication;
   return {
     user,
-    dataproducts
+    dataproduct
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  getAll: () => dispatch(productsActions.getAll()),
+  getById: (dataproduct) => dispatch(productsActions.getById(dataproduct)),
 })
 
 const connectedProductPage = connect(mapStateToProps,mapDispatchToProps)(ProductPage);
